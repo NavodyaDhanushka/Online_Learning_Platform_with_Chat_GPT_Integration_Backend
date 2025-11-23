@@ -1,0 +1,32 @@
+{
+  "name": "online_learning_platform_with_chat_gpt_integration_backend",
+  "version": "1.0.0",
+  "description": "The platform should support user registration, login, course browsing, and student enrollment. Instructors must be able to create and manage courses. Integrate GPT-3 to provide course recommendations and personalized assistance. The application must be cloud-hosted and accessible online.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NavodyaDhanushka/Online_Learning_Platform_with_Chat_GPT_Integration_Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NavodyaDhanushka/Online_Learning_Platform_with_Chat_GPT_Integration_Backend/issues"
+  },
+  "homepage": "https://github.com/NavodyaDhanushka/Online_Learning_Platform_with_Chat_GPT_Integration_Backend#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
