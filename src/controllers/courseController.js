@@ -1,4 +1,5 @@
 import courseService from "../services/courseService.js";
+import CourseService from "../services/courseService.js";
 
 
 class CourseController {
@@ -73,6 +74,23 @@ class CourseController {
             res.status(400).json({message: error.message});
         }
     };
+
+    getInstructorCourses = async (req, res) => {
+        try {
+            const instructorId = req.user.id;
+            const courses = await CourseService.getCoursesByInstructor(instructorId);
+
+            return res.status(200).json({
+                success: true,
+                data: courses,
+            });
+        } catch (error) {
+            return res.status(400).json({
+                success: false,
+                message: error.message
+            });
+        }
+    }
 
 }
 

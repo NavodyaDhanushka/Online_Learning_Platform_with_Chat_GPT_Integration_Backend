@@ -10,11 +10,11 @@ router.get('/', courseController.getAllCourses);
 
 router.get('/enrolled', authMiddleware, roleMiddleware("student"), courseController.getEnrolledCourses);
 router.put('/enroll/:id', authMiddleware, roleMiddleware("student"), courseController.enrollUser);
+router.get('/instructor', authMiddleware, roleMiddleware("instructor"), courseController.getInstructorCourses)
 
 router.get('/:id', courseController.getCourseById);
 router.put('/:id', authMiddleware, roleMiddleware("instructor"), courseController.updateCourse);
 router.delete('/:id', authMiddleware, roleMiddleware("instructor"), courseController.deleteCourse);
-
 
 
 export default router;

@@ -25,7 +25,7 @@ class CourseService {
     }
 
     async updateCourse(courseId, updateData) {
-        const course = await Course.findByIdAndUpdate(courseId, updateData, { new: true, runValidators: true });
+        const course = await Course.findByIdAndUpdate(courseId, updateData, {new: true, runValidators: true});
         if (!course) throw new Error("Course not found");
         return course;
     }
@@ -54,7 +54,7 @@ class CourseService {
         if (!user) throw new Error("User not found");
 
         if (!Array.isArray(user.enrolledCourse)) user.enrolledCourse = [];
-        if(!user.enrolledCourse.includes(courseId)) {
+        if (!user.enrolledCourse.includes(courseId)) {
             user.enrolledCourse.push(courseId);
             await user.save();
 
@@ -65,9 +65,19 @@ class CourseService {
     async getEnrolledCourses(userId) {
 
         console.log("User Id:", userId);
-        return await Course.find({ enrolledUsers: userId})
+        return await Course.find({enrolledUsers: userId})
             .populate("instructor", "name username role")
             .populate("enrolledUsers", "name username role");
+    }
+
+    async getCoursesByInstructor(instructorId) {
+        try {
+            const courses = await Course.find({instructor: instructorId})
+                .populate("instructor", "name username role");
+            return courses;
+        } catch (error) {
+            throw new Error("Error fetching courses: " + error.message);
+        }
     }
 }
 
