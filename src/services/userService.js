@@ -5,9 +5,9 @@ import jwt from "jsonwebtoken";
 class UserService {
 
     async registerUser(data) {
-        const { name, username, password, role } = data;
+        const {name, username, password, role} = data;
 
-        const existingUser = await User.findOne({ username });
+        const existingUser = await User.findOne({username});
         if (existingUser) {
             throw new Error("User already exists");
         }
@@ -23,7 +23,7 @@ class UserService {
     }
 
     async loginUser(username, password) {
-        const user = await User.findOne({ username });
+        const user = await User.findOne({username});
         if (!user) throw new Error("User does not exist!");
 
         const isMatch = await bcrypt.compare(password, user.password);

@@ -1,5 +1,5 @@
 import courseService from "../services/courseService.js";
-import Course from "../models/course.js";
+
 
 class CourseController {
     createCourse = async (req, res) => {
