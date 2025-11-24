@@ -63,6 +63,8 @@ class CourseService {
     }
 
     async getEnrolledCourses(userId) {
+
+        console.log("User Id:", userId);
         return await Course.find({ enrolledUsers: userId})
             .populate("instructor", "name username role")
             .populate("enrolledUsers", "name username role");

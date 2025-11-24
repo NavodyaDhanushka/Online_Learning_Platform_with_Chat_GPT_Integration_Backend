@@ -61,9 +61,14 @@ class CourseController {
 
     getEnrolledCourses = async (req, res) => {
         try {
-            const userId = req.user._id;
+            const userId = req.user.id;
+            console.log("User Id:", userId);
             const courses = await courseService.getEnrolledCourses(userId);
-            res.status(200).json(courses);
+            res.status(200).json({
+                success: true,
+                message: "Enrolled courses loaded successfully",
+                courses
+            });
         } catch (error) {
             res.status(400).json({message: error.message});
         }
