@@ -6,11 +6,12 @@ const courseSchema = new mongoose.Schema({
     content: {type:String, required:true},
 
     instructor: {type:mongoose.Schema.Types.ObjectId,
-        ref:"user", required:true},
+        ref:"Users", required:true},
 
     enrolledUsers: [{type:mongoose.Schema.Types.ObjectId,
-        ref:"user",
+        ref:"Users",
         required:true},]
+
 },{timestamps: true});
 
 export default mongoose.model("Course", courseSchema);
