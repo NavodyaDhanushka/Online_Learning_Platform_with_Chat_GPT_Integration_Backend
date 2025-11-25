@@ -5,7 +5,8 @@ import CourseService from "../services/courseService.js";
 class CourseController {
     createCourse = async (req, res) => {
         try {
-            const course = await courseService.createCourse(req.body);
+            const instructor = req.user.id;
+            const course = await courseService.createCourse(req.body, instructor);
             res.status(200).json({message: "Course created successfully.", course});
         } catch (error) {
             res.status(400).json({message: error.message});
@@ -14,7 +15,8 @@ class CourseController {
 
     getAllCourses = async (req, res) => {
         try {
-            const courses = await courseService.getAllCourses();
+            const userId = req.user.id;
+            const courses = await courseService.getAllCourses(userId);
             res.status(200).json(courses);
         } catch (error) {
             res.status(400).json({message: error.message});
@@ -23,12 +25,14 @@ class CourseController {
 
     getCourseById = async (req, res) => {
         try {
-            const course = await courseService.getCourseById(req.params.id);
+            const currentUserId = req.user.id; // or however you store the user
+            const course = await courseService.getCourseById(req.params.id, currentUserId);
             res.status(200).json(course);
         } catch (error) {
             res.status(400).json({message: error.message});
         }
     };
+
 
     updateCourse = async (req, res) => {
         try {
@@ -63,7 +67,7 @@ class CourseController {
     getEnrolledCourses = async (req, res) => {
         try {
             const userId = req.user.id;
-            console.log("User Id:", userId);
+
             const courses = await courseService.getEnrolledCourses(userId);
             res.status(200).json({
                 success: true,

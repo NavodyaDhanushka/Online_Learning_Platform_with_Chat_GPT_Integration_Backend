@@ -1,28 +1,53 @@
 import Course from "../models/course.js";
-import course from "../models/course.js";
 import User from "../models/user.js";
 
 class CourseService {
 
-    async createCourse(data) {
-        const course = new Course(data);
+    async createCourse(data, instructorId) {
+        const course = new Course({...data, instructor: instructorId});
         await course.save();
         return course;
     }
 
-    async getAllCourses() {
-        return await course.find()
+    async getAllCourses(currentUserId) {
+        // Fetch all courses with populated instructor and enrolledUsers
+        const courses = await Course.find()
             .populate("instructor", "name username role")
             .populate("enrolledUsers", "name username role");
+
+        // Add isEnrolled field for each course
+        const updatedCourses = courses.map(course => {
+            const isEnrolled = course.enrolledUsers.some(
+                user => user._id.toString() === currentUserId.toString()
+            );
+            return {
+                ...course.toObject(), // convert mongoose document to plain JS object
+                isEnrolled
+            };
+        });
+
+        return updatedCourses;
     }
 
-    async getCourseById(id) {
+
+    async getCourseById(id, currentUserId) {
         const course = await Course.findById(id)
             .populate("instructor", "name username role")
             .populate("enrolledUsers", "name username role");
+
         if (!course) throw new Error("Course not found");
-        return course;
+
+        // Add isEnrolled attribute
+        const isEnrolled = course.enrolledUsers.some(
+            (user) => user._id.toString() === currentUserId
+        );
+
+        return {
+            ...course.toObject(),
+            isEnrolled
+        };
     }
+
 
     async updateCourse(courseId, updateData) {
         const course = await Course.findByIdAndUpdate(courseId, updateData, {new: true, runValidators: true});
