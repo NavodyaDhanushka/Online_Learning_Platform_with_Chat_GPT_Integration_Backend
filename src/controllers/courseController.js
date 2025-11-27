@@ -1,6 +1,4 @@
 import courseService from "../services/courseService.js";
-import CourseService from "../services/courseService.js";
-
 
 class CourseController {
     createCourse = async (req, res) => {
@@ -82,7 +80,7 @@ class CourseController {
     getInstructorCourses = async (req, res) => {
         try {
             const instructorId = req.user.id;
-            const courses = await CourseService.getCoursesByInstructor(instructorId);
+            const courses = await courseService.getCoursesByInstructor(instructorId);
 
             return res.status(200).json({
                 success: true,

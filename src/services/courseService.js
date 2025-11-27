@@ -10,18 +10,18 @@ class CourseService {
     }
 
     async getAllCourses(currentUserId) {
-        // Fetch all courses with populated instructor and enrolledUsers
+
         const courses = await Course.find()
             .populate("instructor", "name username role")
             .populate("enrolledUsers", "name username role");
 
-        // Add isEnrolled field for each course
+
         const updatedCourses = courses.map(course => {
             const isEnrolled = course.enrolledUsers.some(
                 user => user._id.toString() === currentUserId.toString()
             );
             return {
-                ...course.toObject(), // convert mongoose document to plain JS object
+                ...course.toObject(),
                 isEnrolled
             };
         });
@@ -37,7 +37,6 @@ class CourseService {
 
         if (!course) throw new Error("Course not found");
 
-        // Add isEnrolled attribute
         const isEnrolled = course.enrolledUsers.some(
             (user) => user._id.toString() === currentUserId
         );
