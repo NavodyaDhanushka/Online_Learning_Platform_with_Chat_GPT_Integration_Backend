@@ -516,9 +516,9 @@ To run this project, you will need to add the following environment variables to
 
 #### Backend
 
-`MONGO_URI`=mongodb+srv://root:root@cluster0.2xzxlet.mongodb.net/Online_Learning_Platform?retryWrites=true&w=majority
+`MONGO_URI`=
 
-`JWT_SECRET`=a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2
+`JWT_SECRET`=
 
 `OPENAI_API_KEY`=
 
