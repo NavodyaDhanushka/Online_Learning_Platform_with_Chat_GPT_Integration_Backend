@@ -513,6 +513,7 @@ Start the server
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file for
+https://drive.google.com/drive/folders/1bA5fos870K9zBo7Mlz-3gW4tZU2CpVZ3?usp=drive_link
 
 #### Backend
 
